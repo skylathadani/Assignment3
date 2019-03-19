@@ -21,7 +21,7 @@ public class GameModel{
 	public boolean isON(int i, int j){
 
 		if(game[i][j] == true){
-			return true
+			return true;
 		}
 
 		return false;
@@ -45,17 +45,17 @@ public class GameModel{
 	public String toString(){
 
 		String aString = "[";
-  		for(int i = 0; i < this.x[0].length; i++) {
+  		for(int i = 0; i < this.game[0].length; i++) {
   			aString +="[";
-			for(int j = 0; j < this.x.length; j++ ) {
-        		if(j < this.x.length - 1) {
-        			aString += this.x[j][i] + ", ";
+			for(int j = 0; j < this.game.length; j++ ) {
+        		if(j < this.game.length - 1) {
+        			aString += this.game[j][i] + ", ";
         		}
         		else {
-        			aString += this.x[j][i];
+        			aString += this.game[j][i];
         		}
     		}
-    		if(i < this.x[0].length -1) {
+    		if(i < this.game[0].length -1) {
     			aString += "],";
     			aString += "\r\n";
     		}
