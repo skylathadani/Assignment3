@@ -384,7 +384,7 @@ public class Solution {
         // a board that was unfinishable before calling
         // the method, we do a complete check
         
-        if(!isSuccessful()) {
+        if(!isSuccessful(model)) {
             System.out.println("Warning, method called incorrectly");
             return false;
         }
