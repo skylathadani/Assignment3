@@ -1,7 +1,35 @@
-Your name(s) Gregory Mitchell, Skyla Thadani
-Student Number(s) 3000533307, 300055455
-Course number and section, if applicable, i.e. ITI1121-A00, ITI 1121-C00
-The assignment number 3
+Nom(s)
+Numéro(s) d'étudiant
+Cote du cours
+Numéro du devoir
+
+* Intégrité dans les études
+
+En soumettant ce devoir, je certifie que:
+
+1. J'ai lu les règlements sur la fraude scolaire.
+
+2. Je comprends les conséquences de la fraude scolaire.
+
+3. Sauf pour le code source fourni par les instructeurs du cours,
+   tout le code source soumis est le mien.
+
+4. Je n'ai pas collaboré avec d'autres personnes, à l'exception de
+   ma coéquipière dans le cas d'un travail en équipe (de deux personnes).
+
+       Si vous avez collaboré avec d'autres personnes ou si vous
+       avez obtenu du code source du Web, veuillez soit donner les noms
+       de vos collaborateurs ou vos sources, ainsi que la nature de la
+       collaboration. Mettez ces informations dans le fichier
+       README.txt. Des points seront retranchés proportionnellement à
+       l'aide reçue (0 à 100%).
+
+***
+
+Your name(s)
+Student Number(s)
+Course number and section, if applicable, i.e. ITI 1121-A
+The assignment number
 
 * Academic Integrity
 
