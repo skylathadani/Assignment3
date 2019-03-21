@@ -301,7 +301,7 @@ public class Solution {
     public boolean choose(int i, int j, GameModel model){
         boolean r = true;
         if(model.isON(i,j)){
-            r = EvenNeighborhood(i,j);
+            r = !oddNeighborhood(i,j);
         }else{
             r = oddNeighborhood(i,j);
         }
@@ -334,30 +334,7 @@ public class Solution {
         return (total%2)== 1 ;                
     }
 
-    private boolean EvenNeighborhood(int i, int j) {
-        
-        if(i < 0 || i > height - 1 || j < 0 || j > width - 1) {
-            return false;
-        }
-
-        int total = 0;
-        if(board[i][j]){
-            total++;
-        }
-        if((i > 0) && (board[i-1][j])) {
-            total++;
-        }
-        if((i < height -1 ) && (board[i+1][j])) {
-            total++;
-        }
-        if((j > 0) && (board[i][j-1])) {
-            total++;
-        }
-        if((j < (width - 1)) && (board[i][j+1])) {
-            total++;
-        }
-        return (total%2)== 0 ;                
-    }
+    
 
     /**
      * returns a string representation of the solution
