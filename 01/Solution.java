@@ -1,3 +1,4 @@
+
 // UPDATE THIS FILE AS REQUIRED
 
 
@@ -169,7 +170,7 @@ public class Solution {
     *  true if the solution is completely specified
     * and works
     */
-    public boolean isSuccessful(){
+    public boolean isSuccessful( GameModel model){
 
         if(currentIndex < width*height) {
             System.out.println("Board not finished");
@@ -178,24 +179,7 @@ public class Solution {
 
         for(int i = 0; i < height ; i++){
             for(int j = 0; j < width; j++) {
-                if(!oddNeighborhood(i,j)){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    public boolean isSuccessful(GameModel model){
-
-        if(currentIndex < width*height) {
-            System.out.println("Board not finished");
-            return false;
-        }
-
-        for(int i = 0; i < height ; i++){
-            for(int j = 0; j < width; j++) {
-                if(!evenNeighborhood(i,j,model)){
+                if(!choose(i,j,model)){
                     return false;
                 }
             }
@@ -216,36 +200,8 @@ public class Solution {
     * impossible (which does not mean that the board
     * is possible!)
     */
-    public boolean stillPossible(boolean nextValue) {
-
-        if(currentIndex >= width*height) {
-            System.out.println("Board already full");
-            return false;
-        }
-
-        int i = currentIndex/width;
-        int j = currentIndex%width;
-        boolean before = board[i][j];
-        boolean possible = true;
-
-        board[i][j] = nextValue;
-        
-        if((i > 0) && (!oddNeighborhood(i-1,j))){
-            possible = false;
-        }
-        if(possible && (i == (height-1))) {
-            if((j > 0) && (!oddNeighborhood(i,j-1))){
-                possible = false;
-            }
-            if(possible && (j == (width-1))&& (!oddNeighborhood(i,j))){
-                possible = false;            
-            }
-        }
-        board[i][j] = before;
-        return possible;
-    }
-
     public boolean stillPossible(boolean nextValue, GameModel model) {
+
         if(currentIndex >= width*height) {
             System.out.println("Board already full");
             return false;
@@ -257,21 +213,24 @@ public class Solution {
         boolean possible = true;
 
         board[i][j] = nextValue;
-        
-        if((i > 0) && (!evenNeighborhood(i-1,j,model))){
-            possible = false;
-        }
-        if(possible && (i == (height-1))) {
-            if((j > 0) && (!evenNeighborhood(i,j-1,model))){
+
+        if((i > 0) && (!choose(i-1,j,model))){
                 possible = false;
             }
-            if(possible && (j == (width-1))&& (!evenNeighborhood(i,j,model))){
-                possible = false;            
-            }
-        }
-        board[i][j] = before;
-        return possible;
+            if(possible && (i == (height-1))) {
+                if((j > 0) && (!choose(i,j-1,model))){
+                    possible = false;
+                }
+                if(possible && (j == (width-1))&& (!choose(i,j,model))){
+                    possible = false;            
+                }
+        
+        
     }
+
+    board[i][j] = before;
+        return possible;
+}
 
     /**
     * this method attempts to finish the board. 
@@ -285,67 +244,6 @@ public class Solution {
     * @return true if the board can be finished.
     * the board is also completed
     */
-    public boolean finish(){
-
-
-        int i = currentIndex/width;
-        int j = currentIndex%width;
-        
-/*
-        if(i == 0 && height > 1) {
-            System.out.println("First line incomplete, can't proceed");
-            return false;
-        }
-*/
-
-        while(currentIndex < height*width) {
-            if(i < height - 1 ) {
-                setNext(!oddNeighborhood(i-1,j));
-                i = currentIndex/width;
-                j = currentIndex%width;
-            } else { //last raw
-                if(j == 0){
-                    setNext(!oddNeighborhood(i-1,j));
-                } else {
-                   if((height > 1) && oddNeighborhood(i-1,j) != oddNeighborhood(i,j-1)){
-                     return false;
-                   }
-                   setNext(!oddNeighborhood(i,j-1));
-                } 
-                i = currentIndex/width;
-                j = currentIndex%width;
-            }
-        }
-        if(!oddNeighborhood(height-1,width-1)){
-            return false;
-        }
-        // here we should return true because we could
-        // successfully finish the board. However, as a
-        // precaution, if someone called the method on
-        // a board that was unfinishable before calling
-        // the method, we do a complete check
-        
-        if(!isSuccessful()) {
-            System.out.println("Warning, method called incorrectly");
-            return false;
-        }
-       
-        return true;
-
-    }
-
-    public int getSize() {
-        int count = 0;
-        for(int i =0; i < height; i++) {
-            for(int j = 0; j < width; j++) {
-                if(board[i][j] == true) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
-
     public boolean finish(GameModel model){
 
 
@@ -361,23 +259,23 @@ public class Solution {
 
         while(currentIndex < height*width) {
             if(i < height - 1 ) {
-                setNext(!evenNeighborhood(i-1,j,model));
+                setNext(!choose(i-1,j,model));
                 i = currentIndex/width;
                 j = currentIndex%width;
             } else { //last raw
                 if(j == 0){
-                    setNext(!evenNeighborhood(i-1,j,model));
+                    setNext(!choose(i-1,j,model));
                 } else {
-                   if((height > 1) && evenNeighborhood(i-1,j,model) != evenNeighborhood(i,j-1,model)){
+                   if((height > 1) && choose(i-1,j,model) != choose(i,j-1,model)){
                      return false;
                    }
-                   setNext(!evenNeighborhood(i,j-1,model));
+                   setNext(!choose(i,j-1,model));
                 } 
                 i = currentIndex/width;
                 j = currentIndex%width;
             }
         }
-        if(!evenNeighborhood(height-1,width-1,model)){
+        if(!choose(height-1,width-1,model)){
             return false;
         }
         // here we should return true because we could
@@ -399,6 +297,17 @@ public class Solution {
      * checks if board[i][j] and its neighborhood
      * have an odd number of values ``true''
      */
+
+    public boolean choose(int i, int j, GameModel model){
+        boolean r = true;
+        if(model.isON(i,j)){
+            r = EvenNeighborhood(i,j);
+        }else{
+            r = oddNeighborhood(i,j);
+        }
+
+        return r;
+    }
 
     private boolean oddNeighborhood(int i, int j) {
         
@@ -425,26 +334,26 @@ public class Solution {
         return (total%2)== 1 ;                
     }
 
-    private boolean evenNeighborhood(int i, int j, GameModel model) {
+    private boolean EvenNeighborhood(int i, int j) {
         
         if(i < 0 || i > height - 1 || j < 0 || j > width - 1) {
             return false;
         }
 
         int total = 0;
-        if(model.isON(i, j)) {
+        if(board[i][j]){
             total++;
         }
-        if((i > 0) && model.isON(i-1, j)) {
+        if((i > 0) && (board[i-1][j])) {
             total++;
         }
-        if((i < height -1 ) && model.isON(i+1, j)) {
+        if((i < height -1 ) && (board[i+1][j])) {
             total++;
         }
-        if((j > 0) && model.isON(i, j-1)) {
+        if((j > 0) && (board[i][j-1])) {
             total++;
         }
-        if((j < (width - 1)) && model.isON(i, j+1)) {
+        if((j < (width - 1)) && (board[i][j+1])) {
             total++;
         }
         return (total%2)== 0 ;                
@@ -472,6 +381,21 @@ public class Solution {
         out.append("]");
         return out.toString();
     }
+
+    public int getSize() {
+        int count = 0;
+        for(int i =0; i < board.length; i++) {
+            for(int j = 0; j < board[0].length; j++) {
+                if(board[i][j] == true) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
+
 
 }
 
