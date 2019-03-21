@@ -70,6 +70,8 @@ public class Solution {
         this.height = other.height;
         this.currentIndex = other.currentIndex;
 
+        board = new boolean[height][width];
+
         for(int i = 0; i < currentIndex; i++){
             board[i/width][i%width] = other.board[i/width][i%width];
         } 
@@ -334,8 +336,8 @@ public class Solution {
 
     public int getSize() {
         int count = 0;
-        for(int i =0; i < width; i++) {
-            for(int j = 0; j < height; j++) {
+        for(int i =0; i < height; i++) {
+            for(int j = 0; j < width; j++) {
                 if(board[i][j] == true) {
                     count++;
                 }

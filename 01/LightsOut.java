@@ -54,6 +54,45 @@ public class LightsOut {
      *  an instance of <b>ArrayList&lt;Solution&gt;</b>
      * containing all the solutions
      */
+    
+    public static ArrayList<Solution> solve(int width, int height){
+
+        QueueImplementation<Solution> q  = new QueueImplementation<Solution>();
+        ArrayList<Solution> solutions  = new ArrayList<Solution>();
+
+        q.enqueue(new Solution(width,height));
+        long start = System.currentTimeMillis();
+        while(!q.isEmpty()){
+            Solution s  = q.dequeue();
+            if(s.isReady()){
+                // by construction, it is successfull
+                System.out.println("Solution found in " + (System.currentTimeMillis()-start) + " ms" );
+                solutions.add(s);
+            } else {
+                boolean withTrue = s.stillPossible(true);
+                boolean withFalse = s.stillPossible(false);
+                if(withTrue && withFalse) {
+                    Solution s2 = new Solution(s);
+                    s.setNext(true);
+                    q.enqueue(s);
+                    s2.setNext(false);
+                    q.enqueue(s2);
+                } else if (withTrue) {
+                    s.setNext(true);
+                    if(s.finish()){
+                        q.enqueue(s);
+                    }                
+                } else if (withFalse) {
+                    s.setNext(false);
+                    if( s.finish()){
+                        q.enqueue(s); 
+                    }               
+                }
+            }
+        }
+        return solutions;
+    }
+
     public static ArrayList<Solution> solve(GameModel model){
 
         QueueImplementation<Solution> q  = new QueueImplementation<Solution>();
