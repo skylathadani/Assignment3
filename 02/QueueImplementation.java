@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class QueueImplementation<E> implements Queue<E> {
 
  // YOUR CODE HERE
@@ -24,9 +26,9 @@ public class QueueImplementation<E> implements Queue<E> {
 	this.queue.add(value);
 	}
 
-	public Solution dequeue(){
+	public E dequeue(){
 
-		Solution x = this.queue.get(0);
+		E x = this.queue.get(0);
 
 		this.queue.remove(0);
 
@@ -35,3 +37,4 @@ public class QueueImplementation<E> implements Queue<E> {
 	}
 
 }
+

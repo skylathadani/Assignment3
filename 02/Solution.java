@@ -170,7 +170,7 @@ public class Solution {
     *  true if the solution is completely specified
     * and works
     */
-    public boolean isSuccessful(){
+    public boolean isSuccessful( GameModel model){
 
         if(currentIndex < width*height) {
             System.out.println("Board not finished");
@@ -179,7 +179,7 @@ public class Solution {
 
         for(int i = 0; i < height ; i++){
             for(int j = 0; j < width; j++) {
-                if(!oddNeighborhood(i,j)){
+                if(!choose(i,j,model)){
                     return false;
                 }
             }
@@ -200,7 +200,7 @@ public class Solution {
     * impossible (which does not mean that the board
     * is possible!)
     */
-    public boolean stillPossible(boolean nextValue) {
+    public boolean stillPossible(boolean nextValue, GameModel model) {
 
         if(currentIndex >= width*height) {
             System.out.println("Board already full");
@@ -213,22 +213,24 @@ public class Solution {
         boolean possible = true;
 
         board[i][j] = nextValue;
-        
-        if((i > 0) && (!oddNeighborhood(i-1,j))){
-            possible = false;
-        }
-        if(possible && (i == (height-1))) {
-            if((j > 0) && (!oddNeighborhood(i,j-1))){
+
+        if((i > 0) && (!choose(i-1,j,model))){
                 possible = false;
             }
-            if(possible && (j == (width-1))&& (!oddNeighborhood(i,j))){
-                possible = false;            
-            }
-        }
-        board[i][j] = before;
-        return possible;
+            if(possible && (i == (height-1))) {
+                if((j > 0) && (!choose(i,j-1,model))){
+                    possible = false;
+                }
+                if(possible && (j == (width-1))&& (!choose(i,j,model))){
+                    possible = false;            
+                }
+        
+        
     }
 
+    board[i][j] = before;
+        return possible;
+}
 
     /**
     * this method attempts to finish the board. 
@@ -242,7 +244,7 @@ public class Solution {
     * @return true if the board can be finished.
     * the board is also completed
     */
-    public boolean finish(){
+    public boolean finish(GameModel model){
 
 
         int i = currentIndex/width;
@@ -257,23 +259,23 @@ public class Solution {
 
         while(currentIndex < height*width) {
             if(i < height - 1 ) {
-                setNext(!oddNeighborhood(i-1,j));
+                setNext(!choose(i-1,j,model));
                 i = currentIndex/width;
                 j = currentIndex%width;
             } else { //last raw
                 if(j == 0){
-                    setNext(!oddNeighborhood(i-1,j));
+                    setNext(!choose(i-1,j,model));
                 } else {
-                   if((height > 1) && oddNeighborhood(i-1,j) != oddNeighborhood(i,j-1)){
+                   if((height > 1) && choose(i-1,j,model) != choose(i,j-1,model)){
                      return false;
                    }
-                   setNext(!oddNeighborhood(i,j-1));
+                   setNext(!choose(i,j-1,model));
                 } 
                 i = currentIndex/width;
                 j = currentIndex%width;
             }
         }
-        if(!oddNeighborhood(height-1,width-1)){
+        if(!choose(height-1,width-1,model)){
             return false;
         }
         // here we should return true because we could
@@ -282,7 +284,7 @@ public class Solution {
         // a board that was unfinishable before calling
         // the method, we do a complete check
         
-        if(!isSuccessful()) {
+        if(!isSuccessful(model)) {
             System.out.println("Warning, method called incorrectly");
             return false;
         }
@@ -295,6 +297,17 @@ public class Solution {
      * checks if board[i][j] and its neighborhood
      * have an odd number of values ``true''
      */
+
+    public boolean choose(int i, int j, GameModel model){
+        boolean r = true;
+        if(model.isON(i,j)){
+            r = !oddNeighborhood(i,j);
+        }else{
+            r = oddNeighborhood(i,j);
+        }
+
+        return r;
+    }
 
     private boolean oddNeighborhood(int i, int j) {
         
@@ -321,6 +334,8 @@ public class Solution {
         return (total%2)== 1 ;                
     }
 
+    
+
     /**
      * returns a string representation of the solution
      *
@@ -343,6 +358,29 @@ public class Solution {
         out.append("]");
         return out.toString();
     }
+
+    public int getSize() {
+        int count = 0;
+        for(int i =0; i < board.length; i++) {
+            for(int j = 0; j < board[0].length; j++) {
+                if(board[i][j] == true) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public boolean get(int i, int j){
+        if(board[i][j] == true){
+            return true;
+        }
+
+        return false;
+    }
+
+
+
 
 }
 
