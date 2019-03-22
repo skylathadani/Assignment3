@@ -51,6 +51,19 @@ public class GameController implements ActionListener, ItemListener {
     public void actionPerformed(ActionEvent e) {
         
         // YOUR CODE HERE
+        if(e.getActionCommand().equals("Reset")) {
+            model.reset();
+        }
+        else if(e.getActionCommand().equals("Random")) {
+            model.randomize();
+        }
+        else if(e.getActionCommand().equals("Quit")) {
+            model.quit();
+        }
+        else {
+            System.err.println("Unkwon action: " + e.getActionCommand());
+            System.exit(0);
+        }
 
     }
 
@@ -69,4 +82,7 @@ public class GameController implements ActionListener, ItemListener {
 
     // YOUR OTHER METHODS HERE
 
+    /*public void update() {
+        view.update();
+    }*/
 }
