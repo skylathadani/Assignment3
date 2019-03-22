@@ -18,6 +18,10 @@ public class GameController implements ActionListener, ItemListener {
 
     // YOUR VARIABLES HERE
 
+    GameModel model;
+
+    GameView view;
+
     /**
      * Constructor used for initializing the controller. It creates the game's view 
      * and the game's model instances
@@ -30,6 +34,9 @@ public class GameController implements ActionListener, ItemListener {
     public GameController(int width, int height) {
 
         // YOUR CODE HERE
+
+        model = new GameModel(width,height);
+        view = new GameView(model,this);
     }
 
 
