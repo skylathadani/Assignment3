@@ -14,6 +14,8 @@ public class GridButton extends JButton {
     int row;
 
     ImageIcon img;
+    //Please ignore img2
+    ImageIcon img2;
 
 
     /**
@@ -30,6 +32,8 @@ public class GridButton extends JButton {
 
         img = new ImageIcon("Icons/Light-1.png");
 
+        //Please ignore this variable its a surprise ;)
+        img2 = new ImageIcon("Icons/Oileauouigee.png");
         setIcon(img);
 
         this.column = column;
@@ -100,5 +104,9 @@ public class GridButton extends JButton {
 
     // YOUR OTHER METHODS HERE
 
+    //This was for fun please ignore
+    public ImageIcon getBaguette() {
+        return img2;
+    }
     
 }

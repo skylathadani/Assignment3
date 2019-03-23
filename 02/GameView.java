@@ -153,6 +153,9 @@ public class GameView extends JFrame {
 
     }
 
+    public void change() {
+        this.solve.setSelected(false);
+    }
     /*public static void main(String[] args) {
 
         GameModel m = new GameModel(4,4);

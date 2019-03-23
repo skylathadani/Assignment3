@@ -3,6 +3,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.JOptionPane;
+import java.awt.Image;
 // YOUR OTHER IMPORTS HERE IF NEEDED
 
 /**
@@ -17,7 +18,6 @@ import javax.swing.JOptionPane;
 public class GameController implements ActionListener, ItemListener {
 
     // YOUR VARIABLES HERE
-
     private GameModel model;
 
     private GameView view;
@@ -54,6 +54,7 @@ public class GameController implements ActionListener, ItemListener {
         // YOUR CODE HERE
         if(e.getActionCommand().equals("Reset")) {
             model.reset();
+            view.change();
             update();
         }
         else if(e.getActionCommand().equals("Random")) {
@@ -83,7 +84,17 @@ public class GameController implements ActionListener, ItemListener {
            //e.getSource(e.getSource().getHeight(),e.getSource().getWidth())
         }
         if(model.isFinished()) {
-            JOptionPane.showConfirmDialog(null, "choose one", "choose one", JOptionPane.YES_NO_OPTION);
+        	//please ignore fake GridButton it is for a very special surprise ;)
+            GridButton fake = new GridButton(2,2);
+            int play = JOptionPane.showConfirmDialog(null, "Congratulations, you won in " + model.getNumberOfSteps() + " steps! Would you like to play again?", "Won", JOptionPane.YES_NO_OPTION,0,fake.getBaguette());
+            if(play == JOptionPane.YES_OPTION) {
+            	model.reset();
+            	view.change();
+            	update();
+            }
+            else {
+            	System.exit(0);
+            }
         }
 
     }
@@ -127,9 +138,12 @@ public class GameController implements ActionListener, ItemListener {
     }
 
     public static void main(String[] args) {
-        GameModel m = new GameModel(4,4);
+        int width = Integer.parseInt(args[0]);
+		int height = Integer.parseInt(args[1]);
 
-        GameController c = new GameController(4,4);
+        GameModel m = new GameModel(width,height);
+
+        GameController c = new GameController(width,height);
 
 
 
