@@ -55,21 +55,20 @@ public class GridButton extends JButton {
             img = new ImageIcon("Icons/Light-0.png");     
 
         }
+        if(!isOn){
+            img = new ImageIcon("Icons/Light-1.png");
+        }
 
         if(isOn && isClicked){
             img = new ImageIcon("Icons/Light-2.png");
         }
 
-        if(!isOn && !isClicked){
-            img = new ImageIcon("Images/Light-1.png");
-        }
-
         if(!isOn && isClicked){
-            img = new ImageIcon("Image/Light-3.png");
+            img = new ImageIcon("Icons/Light-3.png");
         }
         
 
-        setIcon(img);
+        this.setIcon(img);
 
     }
 

@@ -2,7 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
-import java.swing.JOptionPane;
+
 // YOUR OTHER IMPORTS HERE IF NEEDED
 
 /**
@@ -53,9 +53,11 @@ public class GameController implements ActionListener, ItemListener {
         // YOUR CODE HERE
         if(e.getActionCommand().equals("Reset")) {
             model.reset();
+            update();
         }
         else if(e.getActionCommand().equals("Random")) {
             model.randomize();
+            update();
         }
         else if(e.getActionCommand().equals("Quit")) {
             System.exit(0);
@@ -68,6 +70,9 @@ public class GameController implements ActionListener, ItemListener {
             if (source instanceof GridButton) {
                 GridButton t = (GridButton) source;
                 model.click(t.getRow(),t.getColumn());
+
+                update();
+                //t.setState(model.isON(t.getRow(),t.getColumn()),false);
                 
             }
             
@@ -77,9 +82,8 @@ public class GameController implements ActionListener, ItemListener {
 
            //e.getSource(e.getSource().getHeight(),e.getSource().getWidth())
         }
-
         if(model.isFinished()) {
-        	JOptionPane.showConfirmDialog(null, "choose one", "choose one", JOptionPane.YES_NO_OPTION);
+            System.out.println("Through the power invested in me I summon forth Patrick the terrible!!!!");
         }
 
     }
@@ -102,21 +106,24 @@ public class GameController implements ActionListener, ItemListener {
         return model.isON(i,j);
 
     }
+    public GameModel model (){
+        return model;
+    }
 
     // YOUR OTHER METHODS HERE
 
-    /*public void update() {
+    public void update() {
         view.update();
-    }*/
+    }
 
     public static void main(String[] args) {
-        GameModel m = new GameModel(10,4);
+        GameModel m = new GameModel(4,4);
 
         GameController c = new GameController(4,4);
 
 
 
-        GameView controller;
-        controller = new GameView(m,c);
+        //GameView controller;
+        //controller = new GameView(m,c);
     }
 }

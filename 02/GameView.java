@@ -53,7 +53,7 @@ public class GameView extends JFrame {
 
         for(int i = 0; i < gameModel.getHeight(); i++){
             for(int j = 0; j < gameModel.getWidth(); j++){
-                GridButton temp = new GridButton(i,j);
+                GridButton temp = new GridButton(j,i);
                 temp.addActionListener(gameController);
                 grid[i][j] = temp;
                 buttons.add(grid[i][j]);
@@ -114,11 +114,15 @@ public class GameView extends JFrame {
 
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[0].length; j++){
-                GridButton temp = grid[i][j];
+                GameModel m = gameController.model();
 
-                boolean on = gameController.click(temp.getRow(),temp.getHeight());
+                boolean o = m.isON(i,j);
 
-                temp.setState(on,false);
+                grid[i][j].setState(o,false);
+
+
+
+                
             }
         }
 
@@ -139,9 +143,9 @@ public class GameView extends JFrame {
 
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
-        GameModel m = new GameModel(10,4);
+        GameModel m = new GameModel(4,4);
 
         GameController c = new GameController(4,4);
 
@@ -149,6 +153,6 @@ public class GameView extends JFrame {
 
         GameView controller;
         controller = new GameView(m,c);
-    }
+    }*/
 
 }

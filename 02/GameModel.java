@@ -23,18 +23,22 @@ public class GameModel{
 		clicked++;
 		game[i][j] = !game[i][j];
 
-		if(i-1 < 0){
+		if(i-1 > -1){
+			System.out.println("blah");
 			game[i-1][j] = !game[i-1][j];
 		}
-		if(j-1<0){
+		if(j-1 > -1){
+			System.out.println("bleh");
 			game[i][j-1] = !game[i][j-1];
 		}
 
 		if(i+1 < game.length){
+			System.out.println("bloh");
 			game[i+1][j] = !game[i+1][j];
 		}
 
 		if(j+1 < game[0].length){
+			System.out.println("blih");
 			game[i][j+1] = !game[i][j+1];
 		}
 
