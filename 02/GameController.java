@@ -86,7 +86,7 @@ public class GameController implements ActionListener, ItemListener {
         if(model.isFinished()) {
         	//please ignore fake GridButton it is for a very special surprise ;)
             GridButton fake = new GridButton(2,2);
-            int play = JOptionPane.showConfirmDialog(null, "Congratulations, you won in " + model.getNumberOfSteps() + " steps! Would you like to play again?", "Won", JOptionPane.YES_NO_OPTION,0,fake.getBaguette());
+            int play = JOptionPane.showConfirmDialog(null, "Congratulations, you won in " + model.getNumberOfSteps() + " steps! Would you like to play again?", "WAAAHHHH", JOptionPane.YES_NO_OPTION,0,fake.getBaguette());
             if(play == JOptionPane.YES_OPTION) {
             	model.reset();
             	view.change();
