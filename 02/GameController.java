@@ -18,9 +18,9 @@ public class GameController implements ActionListener, ItemListener {
 
     // YOUR VARIABLES HERE
 
-    GameModel model;
+    private GameModel model;
 
-    GameView view;
+    private GameView view;
 
     /**
      * Constructor used for initializing the controller. It creates the game's view 
@@ -58,11 +58,18 @@ public class GameController implements ActionListener, ItemListener {
             model.randomize();
         }
         else if(e.getActionCommand().equals("Quit")) {
-            model.quit();
+            System.exit(0);
         }
         else {
-            System.err.println("Unkwon action: " + e.getActionCommand());
-            System.exit(0);
+            //System.err.println("Unknown action: " + e.getActionCommand());
+            //System.exit(0);
+
+            model.click(e.getSource().getHeight(),e.getSource().getWidth());
+            //model.isON(e.getSource().getHeight(),e.getSource().getWidth());
+
+
+
+           //e.getSource(e.getSource().getHeight(),e.getSource().getWidth())
         }
 
     }
@@ -78,6 +85,12 @@ public class GameController implements ActionListener, ItemListener {
     public void  itemStateChanged(ItemEvent e){
 
         // YOU CODE HERE
+    }
+
+    public boolean click(int i, int j){
+
+        return model.isON(i,j);
+
     }
 
     // YOUR OTHER METHODS HERE

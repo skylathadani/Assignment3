@@ -34,19 +34,63 @@ public class GameView extends JFrame {
     public GameView(GameModel gameModel, GameController gameController) {
 
         // YOUR CODE HERE
+        super("LightsOut");
 
         this.gameModel = gameModel;
         this.gameController = gameController;
 
-        super("LightsOut");
+        
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBackground(Color.WHITE);
-        setLayout (new GridLayout(2,3));
+        setLayout (new GridLayout(2,2));
 
-        JPanel buttons = new JPanel(new GridLayout(10,8)); 
+        JPanel buttons = new JPanel(new GridLayout(gameModel.getHeight(),gameModel.getWidth())); 
 
-         
+        GridButton [][] grid = new GridButton[gameModel.getHeight()][gameModel.getWidth()];
+
+        for(int i = 0; i < gameModel.getHeight(); i++){
+            for(int j = 0; j < gameModel.getWidth(); j++){
+                GridButton temp = new GridButton(i,j);
+                temp.addActionListener(gameController);
+                grid[i][j] = temp;
+                buttons.add(grid[i][j]);
+            }
+        }
+
+        JButton reset = new JButton("Reset");
+        reset.setPreferredSize(new Dimension(10, 10));
+        JButton random = new JButton("Random");
+        random.setPreferredSize(new Dimension(10, 10));
+        JButton quit = new JButton("Quit");
+        quit.setPreferredSize(new Dimension(10, 10));
+
+        JPanel control = new JPanel(new GridLayout(4,1));
+
+        JCheckBox solve = new JCheckBox("Solution");
+
+        control.add(reset);
+        control.add(random);
+        control.add(solve);
+        control.add(quit);
+        control.setMaximumSize(new Dimension(100, 100));
+
+        JLabel steps = new JLabel("Number of steps",SwingConstants.CENTER);
+        steps.setSize(100,100);
+
+        this.add(buttons);
+        this.add(control);
+        this.add(steps);
+
+        setSize(700,500);
+
+
+        setVisible(true);
+
+
+
+
+
 
 
 
@@ -63,6 +107,14 @@ public class GameView extends JFrame {
 
         // YOUR CODE HERE
 
+        for(int i = 0; i < grid.length; i++){
+            for(int j = 0; j < grid[0].length; j++){
+                GridButton temp = grid[i][j];
+
+                temp.setState(gameController.isON(temp.getRow(),getColumn()),false);
+            }
+        }
+
     }
 
     /**
@@ -76,6 +128,20 @@ public class GameView extends JFrame {
 
         // YOUR CODE HERE
 
+        return true;
+
+    }
+
+    public static void main(String[] args) {
+
+        GameModel m = new GameModel(10,4);
+
+        GameController c = new GameController(4,4);
+
+
+
+        GameView controller;
+        controller = new GameView(m,c);
     }
 
 }

@@ -34,6 +34,11 @@ public class GridButton extends JButton {
 
         this.column = column;
         this.row = row;
+        //setPreferredSize(new Dimension(5, 5));
+        setBorderPainted(false); 
+        setContentAreaFilled(false); 
+        setFocusPainted(false); 
+        setOpaque(false);
     }
 
    /**
