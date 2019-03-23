@@ -19,6 +19,7 @@ public class GameView extends JFrame {
     GameController gameController;
 
     GridButton[][] grid;
+    private JLabel steps;
 
 
 
@@ -80,7 +81,7 @@ public class GameView extends JFrame {
         control.add(quit);
         control.setMaximumSize(new Dimension(100, 100));
 
-        JLabel steps = new JLabel("Number of steps",SwingConstants.CENTER);
+        steps = new JLabel("Number of steps: " + gameModel.getNumberOfSteps(),SwingConstants.CENTER);
         steps.setSize(100,100);
 
         this.add(buttons);
@@ -115,7 +116,6 @@ public class GameView extends JFrame {
         for(int i = 0; i < grid.length; i++){
             for(int j = 0; j < grid[0].length; j++){
                 GameModel m = gameController.model();
-
                 boolean o = m.isON(i,j);
 
                 grid[i][j].setState(o,false);
@@ -125,7 +125,7 @@ public class GameView extends JFrame {
                 
             }
         }
-
+        steps.setText("Number of steps: " + gameModel.getNumberOfSteps());
     }
 
     /**

@@ -2,7 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
-
+import javax.swing.JOptionPane;
 // YOUR OTHER IMPORTS HERE IF NEEDED
 
 /**
@@ -70,7 +70,6 @@ public class GameController implements ActionListener, ItemListener {
             if (source instanceof GridButton) {
                 GridButton t = (GridButton) source;
                 model.click(t.getRow(),t.getColumn());
-
                 update();
                 //t.setState(model.isON(t.getRow(),t.getColumn()),false);
                 
@@ -83,7 +82,7 @@ public class GameController implements ActionListener, ItemListener {
            //e.getSource(e.getSource().getHeight(),e.getSource().getWidth())
         }
         if(model.isFinished()) {
-            System.out.println("Through the power invested in me I summon forth Patrick the terrible!!!!");
+            JOptionPane.showConfirmDialog(null, "choose one", "choose one", JOptionPane.YES_NO_OPTION);
         }
 
     }
