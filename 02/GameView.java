@@ -20,7 +20,8 @@ public class GameView extends JFrame {
 
     GridButton[][] grid;
     private JLabel steps;
-
+    JCheckBox solve;
+    Solution s;
 
 
 
@@ -72,8 +73,9 @@ public class GameView extends JFrame {
         quit.addActionListener(gameController);
 
         JPanel control = new JPanel(new GridLayout(4,1));
-
-        JCheckBox solve = new JCheckBox("Solution");
+        
+        solve = new JCheckBox("Solution");
+        solve.addItemListener(gameController);
 
         control.add(reset);
         control.add(random);
@@ -118,7 +120,13 @@ public class GameView extends JFrame {
                 GameModel m = gameController.model();
                 boolean o = m.isON(i,j);
 
-                grid[i][j].setState(o,false);
+                if(!solutionShown()) {
+                    grid[i][j].setState(o,false);
+                }
+                else {
+                    Solution y = gameController.sol();
+                    grid[i][j].setState(o, y.get(i,j));
+                } 
 
 
 
@@ -138,8 +146,10 @@ public class GameView extends JFrame {
     public boolean solutionShown(){
 
         // YOUR CODE HERE
-
-        return true;
+        if(this.solve.isSelected()) {
+            return true;
+        }
+        return false;
 
     }
 

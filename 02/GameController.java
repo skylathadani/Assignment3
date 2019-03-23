@@ -22,6 +22,7 @@ public class GameController implements ActionListener, ItemListener {
 
     private GameView view;
 
+    private Solution s;
     /**
      * Constructor used for initializing the controller. It creates the game's view 
      * and the game's model instances
@@ -98,6 +99,15 @@ public class GameController implements ActionListener, ItemListener {
     public void  itemStateChanged(ItemEvent e){
 
         // YOU CODE HERE
+        if(e.getStateChange() == ItemEvent.SELECTED) {
+            s = sol();
+        }
+        update();
+    }
+
+    public  Solution sol() {
+        s = LightsOut.solveShortest(model);
+        return s;
     }
 
     public boolean click(int i, int j){
@@ -105,6 +115,7 @@ public class GameController implements ActionListener, ItemListener {
         return model.isON(i,j);
 
     }
+    
     public GameModel model (){
         return model;
     }
