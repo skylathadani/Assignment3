@@ -2,7 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
-
+import java.swing.JOptionPane;
 // YOUR OTHER IMPORTS HERE IF NEEDED
 
 /**
@@ -76,6 +76,10 @@ public class GameController implements ActionListener, ItemListener {
 
 
            //e.getSource(e.getSource().getHeight(),e.getSource().getWidth())
+        }
+
+        if(model.isFinished()) {
+        	JOptionPane.showConfirmDialog(null, "choose one", "choose one", JOptionPane.YES_NO_OPTION);
         }
 
     }
