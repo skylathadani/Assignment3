@@ -19,6 +19,9 @@ public class GameView extends JFrame {
     GameController gameController;
 
 
+
+
+
     /**
      * Constructor used for initializing the Frame
      * 
@@ -34,6 +37,20 @@ public class GameView extends JFrame {
 
         this.gameModel = gameModel;
         this.gameController = gameController;
+
+        super("LightsOut");
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBackground(Color.WHITE);
+        setLayout (new GridLayout(2,3));
+
+        JPanel buttons = new JPanel(new GridLayout(10,8)); 
+
+         
+
+
+
+
 
     }
 
