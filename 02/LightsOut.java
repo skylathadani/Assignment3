@@ -141,39 +141,28 @@ public class LightsOut {
 
         int width   = DEFAULT_WIDTH;
         int height  = DEFAULT_HEIGHT;
-
-        GameModel model = new GameModel(width,height);
-
+ 
         StudentInfo.display();
 
         if (args.length == 2) {
-
             try{
                 width = Integer.parseInt(args[0]);
-                if(width < 1) {
-                    System.out.println("Invalid width, using default...");
-                    width   = DEFAULT_WIDTH;
+                if(width<1){
+                    System.out.println("Invalid argument, using default...");
+                    width = DEFAULT_WIDTH;
                 }
                 height = Integer.parseInt(args[1]);
-                if(height < 1) {
-                    System.out.println("Invalid height, using default...");
-                    height  = DEFAULT_HEIGHT;
+                if(height<1){
+                    System.out.println("Invalid argument, using default...");
+                    height = DEFAULT_HEIGHT;
                 }
-                
             } catch(NumberFormatException e){
                 System.out.println("Invalid argument, using default...");
                 width   = DEFAULT_WIDTH;
                 height  = DEFAULT_HEIGHT;
             }
         }
-        ArrayList<Solution> results   = solve(model);
-        for(int i =0; i < results.size(); i++){
-
-            System.out.println("****");
-            System.out.println(results.get(i));
-
-        }
-        System.out.println("In a board of "+ width + "x" + height +": " + results.size() + " solution" + (results.size() > 1 ? "s." : "."));
+        GameController game = new GameController(width, height);
 
     }
 }
