@@ -18,6 +18,8 @@ public class GameView extends JFrame {
     GameModel gameModel;
     GameController gameController;
 
+    GridButton[][] grid;
+
 
 
 
@@ -47,7 +49,7 @@ public class GameView extends JFrame {
 
         JPanel buttons = new JPanel(new GridLayout(gameModel.getHeight(),gameModel.getWidth())); 
 
-        GridButton [][] grid = new GridButton[gameModel.getHeight()][gameModel.getWidth()];
+        grid = new GridButton[gameModel.getHeight()][gameModel.getWidth()];
 
         for(int i = 0; i < gameModel.getHeight(); i++){
             for(int j = 0; j < gameModel.getWidth(); j++){
@@ -60,10 +62,13 @@ public class GameView extends JFrame {
 
         JButton reset = new JButton("Reset");
         reset.setPreferredSize(new Dimension(10, 10));
+        reset.addActionListener(gameController);
         JButton random = new JButton("Random");
         random.setPreferredSize(new Dimension(10, 10));
+        random.addActionListener(gameController);
         JButton quit = new JButton("Quit");
         quit.setPreferredSize(new Dimension(10, 10));
+        quit.addActionListener(gameController);
 
         JPanel control = new JPanel(new GridLayout(4,1));
 
@@ -111,7 +116,9 @@ public class GameView extends JFrame {
             for(int j = 0; j < grid[0].length; j++){
                 GridButton temp = grid[i][j];
 
-                temp.setState(gameController.isON(temp.getRow(),getColumn()),false);
+                boolean on = gameController.click(temp.getRow(),temp.getHeight());
+
+                temp.setState(on,false);
             }
         }
 

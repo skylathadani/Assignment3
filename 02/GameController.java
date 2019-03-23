@@ -64,7 +64,13 @@ public class GameController implements ActionListener, ItemListener {
             //System.err.println("Unknown action: " + e.getActionCommand());
             //System.exit(0);
 
-            model.click(e.getSource().getHeight(),e.getSource().getWidth());
+            Object source = e.getSource();
+            if (source instanceof GridButton) {
+                GridButton t = (GridButton) source;
+                model.click(t.getRow(),t.getColumn());
+                
+            }
+            
             //model.isON(e.getSource().getHeight(),e.getSource().getWidth());
 
 
@@ -98,4 +104,15 @@ public class GameController implements ActionListener, ItemListener {
     /*public void update() {
         view.update();
     }*/
+
+    public static void main(String[] args) {
+        GameModel m = new GameModel(10,4);
+
+        GameController c = new GameController(4,4);
+
+
+
+        GameView controller;
+        controller = new GameView(m,c);
+    }
 }
