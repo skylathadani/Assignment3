@@ -1,7 +1,7 @@
-Nom(s)
-Numéro(s) d'étudiant
-Cote du cours
-Numéro du devoir
+﻿Gregory Mitchell, Skyla Thadani
+300053307, 300055455
+ITI-1121 A, IIT-1121 C
+Assignment 3
 
 * Intégrité dans les études
 
@@ -26,10 +26,10 @@ En soumettant ce devoir, je certifie que:
 
 ***
 
-Your name(s)
-Student Number(s)
-Course number and section, if applicable, i.e. ITI 1121-A
-The assignment number
+Gregory Mitchell, Skyla Thadani
+300053307, 300055455
+ITI-1121 A, IIT-1121 C
+Assignment 3
 
 * Academic Integrity
 
